@@ -53,13 +53,18 @@ const routes = [
       {
         path: "testorder",
         name: "Testorder",
-        // 驗證判斷也須放到子層
-        // meta: {
-        //   requiresAuth: true
-        // },
         component: () =>
           import(
             /* webpackChunkName: "products" */ "../components/Testorder.vue"
+          )
+      },
+      {
+        // 結帳頁記得帶入 orderId ，冒號為動態綁定參數
+        path: "checkout/:orderId",
+        name: "Checkout",
+        component: () =>
+          import(
+            /* webpackChunkName: "products" */ "../components/Checkout.vue"
           )
       }
     ]

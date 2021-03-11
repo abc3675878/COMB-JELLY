@@ -5,7 +5,7 @@
       <div class="col-md-4 mb-4" v-for="item in products" :key="item.id">
         <div class="card border-0 shadow-sm">
           <div
-            style="height: 150px; background-size: cover; background-position: center"
+            style="height: 300px; background-size: cover; background-position: center"
             :style="{ backgroundImage: `url(${item.imageUrl})` }"
           ></div>
           <div class="card-body">
@@ -119,8 +119,7 @@
       </div>
     </div>
     <!-- 購物車列表 -->
-    <hr />
-    <table class="table">
+    <table class="table container mt-4">
       <thead>
         <th></th>
         <th>品名</th>
@@ -164,7 +163,7 @@
       </tfoot>
     </table>
     <!-- 優惠碼 -->
-    <div class="input-group mb-3 input-group-sm">
+    <div class="input-group mb-3 container input-group-sm">
       <input
         v-model="coupon_code"
         type="text"
@@ -184,7 +183,7 @@
     <!-- 建立訂單頁面 -->
     <div class="my-5 row justify-content-center">
       <ValidationObserver v-slot="{ invalid }">
-        <form class="col-md-6" @submit.prevent="createOrder">
+        <form @submit.prevent="createOrder">
           <div class="form-group">
             <ValidationProvider
               name="Email"
@@ -431,9 +430,11 @@ export default {
       vm.isLoading = true;
       this.$http.post(api, { data: order }).then(res => {
         console.log("送出訂單", res.data);
-        vm.isLoading = false;
-        vm.getCart();
-        if (!res.data.success) {
+        if (res.data.success) {
+          vm.isLoading = false;
+          // 若成功送出，跳頁到checkout page 路徑記得帶入 orderId
+          vm.$router.push(`checkout/${res.data.orderId}`);
+        } else {
           this.$bus.$emit("message:push", res.data.message, "danger");
         }
       });
