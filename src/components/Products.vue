@@ -9,7 +9,7 @@
     </div>
     <!-- Modal -->
     <div class="modal fade" id="addProduct" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content border-0">
           <div class="modal-header bg-dark text-white">
             <h5 class="modal-title" id="exampleModalLabel">
@@ -21,7 +21,8 @@
           </div>
           <div class="modal-body">
             <div class="row">
-              <div class="col-sm-4">
+              <!-- 上傳 1 -->
+              <div class="col-sm-2">
                 <div class="form-group">
                   <label for="image">輸入圖片網址</label>
                   <input
@@ -55,7 +56,182 @@
                   :src="tempProduct.imageUrl"
                 />
               </div>
-              <div class="col-sm-8">
+              <!-- 上傳 2 -->
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label for="image">輸入圖片網址</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="image"
+                    placeholder="請輸入圖片連結"
+                    v-model="tempProduct.imageUrl2"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="customFile"
+                    >或 上傳圖片
+                    <i
+                      class="fas fa-circle-notch fa-spin"
+                      v-if="status.fileUploading"
+                    ></i>
+                  </label>
+                  <input
+                    type="file"
+                    id="customFile"
+                    class="form-control"
+                    ref="files2"
+                    @change="uploadFile2"
+                  />
+                </div>
+                <img
+                  img="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=828346ed697837ce808cae68d3ddc3cf&auto=format&fit=crop&w=1350&q=80"
+                  class="img-fluid"
+                  alt=""
+                  :src="tempProduct.imageUrl2"
+                />
+              </div>
+              <!-- 上傳 3 -->
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label for="image">輸入圖片網址</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="image"
+                    placeholder="請輸入圖片連結"
+                    v-model="tempProduct.imageUrl3"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="customFile"
+                    >或 上傳圖片
+                    <i
+                      class="fas fa-circle-notch fa-spin"
+                      v-if="status.fileUploading"
+                    ></i>
+                  </label>
+                  <input
+                    type="file"
+                    id="customFile"
+                    class="form-control"
+                    ref="files3"
+                    @change="uploadFile3"
+                  />
+                </div>
+                <img
+                  img="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=828346ed697837ce808cae68d3ddc3cf&auto=format&fit=crop&w=1350&q=80"
+                  class="img-fluid"
+                  alt=""
+                  :src="tempProduct.imageUrl3"
+                />
+              </div>
+              <!-- 上傳 4 -->
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label for="image">輸入圖片網址</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="image"
+                    placeholder="請輸入圖片連結"
+                    v-model="tempProduct.imageUrl4"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="customFile"
+                    >或 上傳圖片
+                    <i
+                      class="fas fa-circle-notch fa-spin"
+                      v-if="status.fileUploading"
+                    ></i>
+                  </label>
+                  <input
+                    type="file"
+                    id="customFile"
+                    class="form-control"
+                    ref="files4"
+                    @change="uploadFile4"
+                  />
+                </div>
+                <img
+                  img="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=828346ed697837ce808cae68d3ddc3cf&auto=format&fit=crop&w=1350&q=80"
+                  class="img-fluid"
+                  alt=""
+                  :src="tempProduct.imageUrl4"
+                />
+              </div>
+              <!-- 上傳 5 -->
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label for="image">輸入圖片網址</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="image"
+                    placeholder="請輸入圖片連結"
+                    v-model="tempProduct.imageUrl5"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="customFile"
+                    >或 上傳圖片
+                    <i
+                      class="fas fa-circle-notch fa-spin"
+                      v-if="status.fileUploading"
+                    ></i>
+                  </label>
+                  <input
+                    type="file"
+                    id="customFile"
+                    class="form-control"
+                    ref="files5"
+                    @change="uploadFile5"
+                  />
+                </div>
+                <img
+                  img="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=828346ed697837ce808cae68d3ddc3cf&auto=format&fit=crop&w=1350&q=80"
+                  class="img-fluid"
+                  alt=""
+                  :src="tempProduct.imageUrl5"
+                />
+              </div>
+              <!-- 上傳 6 -->
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label for="image">輸入圖片網址</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="image"
+                    placeholder="請輸入圖片連結"
+                    v-model="tempProduct.imageUrl6"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="customFile"
+                    >或 上傳圖片
+                    <i
+                      class="fas fa-circle-notch fa-spin"
+                      v-if="status.fileUploading"
+                    ></i>
+                  </label>
+                  <input
+                    type="file"
+                    id="customFile"
+                    class="form-control"
+                    ref="files6"
+                    @change="uploadFile6"
+                  />
+                </div>
+                <img
+                  img="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=828346ed697837ce808cae68d3ddc3cf&auto=format&fit=crop&w=1350&q=80"
+                  class="img-fluid"
+                  alt=""
+                  :src="tempProduct.imageUrl6"
+                />
+              </div>
+              <div class="col-sm-12">
                 <div class="form-group">
                   <label for="title">標題</label>
                   <input
@@ -376,7 +552,142 @@ export default {
           this.$bus.$emit('message:push', res.data.message, 'danger')
         }
       })
-    }
+    },
+    uploadFile2() {
+      const vm = this;
+      const uploadedFile2 = this.$refs.files2.files[0];
+      const formData = new FormData();
+      formData.append('file-to-upload', uploadedFile2);
+      const api = `${process.env.VUE_APP_API}api/abc3675878/admin/upload`;
+      vm.status.fileUploading = true;
+      this.$http.post(api, formData, {
+        // 將表單形式改成 form-data
+        // https://reurl.cc/ZQZQZl
+        headers: {
+          'Content-type': 'multipart/form-data'
+        }
+      }).then(res=> {
+        console.log(res.data);
+        vm.status.fileUploading = false;
+        // 把圖片存到tempProduct
+        if(res.data.success) {
+
+          // 用set強制雙向綁定
+          vm.$set(vm.tempProduct, 'imageUrl2', res.data.imageUrl)
+        } else {
+          // 把錯誤訊息利用bus推送到Alert.vue
+          this.$bus.$emit('message:push', res.data.message, 'danger')
+        }
+      })
+    },
+    uploadFile3() {
+      const vm = this;
+      const uploadedFile3 = this.$refs.files3.files[0];
+      const formData = new FormData();
+      formData.append('file-to-upload', uploadedFile3);
+      const api = `${process.env.VUE_APP_API}api/abc3675878/admin/upload`;
+      vm.status.fileUploading = true;
+      this.$http.post(api, formData, {
+        // 將表單形式改成 form-data
+        // https://reurl.cc/ZQZQZl
+        headers: {
+          'Content-type': 'multipart/form-data'
+        }
+      }).then(res=> {
+        console.log(res.data);
+        vm.status.fileUploading = false;
+        // 把圖片存到tempProduct
+        if(res.data.success) {
+
+          // 用set強制雙向綁定
+          vm.$set(vm.tempProduct, 'imageUrl3', res.data.imageUrl)
+        } else {
+          // 把錯誤訊息利用bus推送到Alert.vue
+          this.$bus.$emit('message:push', res.data.message, 'danger')
+        }
+      })
+    },
+    uploadFile4() {
+      const vm = this;
+      const uploadedFile4 = this.$refs.files4.files[0];
+      const formData = new FormData();
+      formData.append('file-to-upload', uploadedFile4);
+      const api = `${process.env.VUE_APP_API}api/abc3675878/admin/upload`;
+      vm.status.fileUploading = true;
+      this.$http.post(api, formData, {
+        // 將表單形式改成 form-data
+        // https://reurl.cc/ZQZQZl
+        headers: {
+          'Content-type': 'multipart/form-data'
+        }
+      }).then(res=> {
+        console.log(res.data);
+        vm.status.fileUploading = false;
+        // 把圖片存到tempProduct
+        if(res.data.success) {
+
+          // 用set強制雙向綁定
+          vm.$set(vm.tempProduct, 'imageUrl4', res.data.imageUrl)
+        } else {
+          // 把錯誤訊息利用bus推送到Alert.vue
+          this.$bus.$emit('message:push', res.data.message, 'danger')
+        }
+      })
+    },
+    uploadFile5() {
+      const vm = this;
+      const uploadedFile5 = this.$refs.files5.files[0];
+      const formData = new FormData();
+      formData.append('file-to-upload', uploadedFile5);
+      const api = `${process.env.VUE_APP_API}api/abc3675878/admin/upload`;
+      vm.status.fileUploading = true;
+      this.$http.post(api, formData, {
+        // 將表單形式改成 form-data
+        // https://reurl.cc/ZQZQZl
+        headers: {
+          'Content-type': 'multipart/form-data'
+        }
+      }).then(res=> {
+        console.log(res.data);
+        vm.status.fileUploading = false;
+        // 把圖片存到tempProduct
+        if(res.data.success) {
+
+          // 用set強制雙向綁定
+          vm.$set(vm.tempProduct, 'imageUrl5', res.data.imageUrl)
+        } else {
+          // 把錯誤訊息利用bus推送到Alert.vue
+          this.$bus.$emit('message:push', res.data.message, 'danger')
+        }
+      })
+    },
+    uploadFile6() {
+      const vm = this;
+      const uploadedFile6 = this.$refs.files6.files[0];
+      const formData = new FormData();
+      formData.append('file-to-upload', uploadedFile6);
+      const api = `${process.env.VUE_APP_API}api/abc3675878/admin/upload`;
+      vm.status.fileUploading = true;
+      this.$http.post(api, formData, {
+        // 將表單形式改成 form-data
+        // https://reurl.cc/ZQZQZl
+        headers: {
+          'Content-type': 'multipart/form-data'
+        }
+      }).then(res=> {
+        console.log(res.data);
+        vm.status.fileUploading = false;
+        // 把圖片存到tempProduct
+        if(res.data.success) {
+
+          // 用set強制雙向綁定
+          vm.$set(vm.tempProduct, 'imageUrl6', res.data.imageUrl)
+        } else {
+          // 把錯誤訊息利用bus推送到Alert.vue
+          this.$bus.$emit('message:push', res.data.message, 'danger')
+        }
+      })
+    },
   },
   created() {
     this.getProducts();

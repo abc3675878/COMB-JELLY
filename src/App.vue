@@ -15,12 +15,13 @@ export default {
 
 * {
   font-family: Helvetica, sans-serif;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
   box-sizing: border-box;
   padding: 0;
   margin: 0;
   list-style: none;
   color: #181818;
+  font-weight: 300;
 }
 
 html,
