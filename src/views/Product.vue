@@ -232,7 +232,8 @@ export default {
           // 重新取得購物車
           this.getCart();
           // 打開購物車列表
-          this.$store.state.openCart = true;
+          // this.$store.state.openCart = true;
+          this.$store.dispatch("updateOpenCart", true);
         });
       } else {
         this.cart_loading = false;

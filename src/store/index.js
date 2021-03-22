@@ -7,7 +7,15 @@ export default new Vuex.Store({
   state: {
     openCart: false
   },
-  mutations: {},
-  actions: {},
+  actions: {
+    updateOpenCart(context, payload) {
+      context.commit("OPENCART", payload);
+    }
+  },
+  mutations: {
+    OPENCART(state, payload) {
+      state.openCart = payload;
+    }
+  },
   modules: {}
 });
