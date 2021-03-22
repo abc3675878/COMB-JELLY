@@ -15,7 +15,9 @@
           <li>INFO</li>
           <li>SEARCH</li>
         </div>
-        <div class="cart" @click="toggleCart">CART</div>
+        <div class="cart" @click.prevent="toggleCart">
+          <a href="">CART</a>
+        </div>
         <div
           class="side-cart d-flex flex-column justify-content-between"
           :class="{ toggle: this.openCart }"
@@ -140,7 +142,7 @@ export default {
   padding-top: 24px;
   position: fixed;
   background-color: white;
-  z-index: 1999;
+  z-index: 9999;
 }
 
 .logo {

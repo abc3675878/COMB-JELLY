@@ -3,7 +3,7 @@
     <topbar></topbar>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12 col-sm-8">
+        <div class="col-12 col-md-8">
           <div class="row slider-container">
             <input type="radio" id="control-1" name="control" checked />
             <input type="radio" id="control-2" name="control" />
@@ -12,22 +12,22 @@
             <input type="radio" id="control-5" name="control" />
             <input type="radio" id="control-6" name="control" />
 
-            <div class="col-12 col-xl-6 mb-2 slider">
+            <div class="col-12 col-xl-6 mb-3 slider">
               <img class="img-fluid" :src="product.imageUrl" alt="" />
             </div>
-            <div class="col-12 col-xl-6 mb-2 slider">
+            <div class="col-12 col-xl-6 mb-3 slider">
               <img class="img-fluid" :src="product.imageUrl2" alt="" />
             </div>
-            <div class="col-12 col-xl-6 mb-2 slider">
+            <div class="col-12 col-xl-6 mb-3 slider">
               <img class="img-fluid" :src="product.imageUrl3" alt="" />
             </div>
-            <div class="col-12 col-xl-6 mb-2 slider">
+            <div class="col-12 col-xl-6 mb-3 slider">
               <img class="img-fluid" :src="product.imageUrl4" alt="" />
             </div>
-            <div class="col-12 col-xl-6 mb-2 slider">
+            <div class="col-12 col-xl-6 mb-3 slider">
               <img class="img-fluid" :src="product.imageUrl5" alt="" />
             </div>
-            <div class="col-12 col-xl-6 mb-2 slider">
+            <div class="col-12 col-xl-6 mb-3 slider">
               <img class="img-fluid" :src="product.imageUrl6" alt="" />
             </div>
 
@@ -96,7 +96,7 @@
             </div>
           </div>
         </div>
-        <div class="col-12 col-sm-4 text_area">
+        <div class="col-12 col-md-4 text_area">
           <div class="title">{{ product.title }}</div>
           <div
             :class="{ sale: product.origin_price !== product.price }"
@@ -119,7 +119,19 @@
                 size
               }}</option>
             </select>
-            <button @click="addToCart">ADD TO CART</button>
+            <button :class="{ 'cart-active': cart_loading }" @click="addToCart">
+              <div class="cartBtn" v-if="!cart_loading">
+                {{ cart_text }}
+              </div>
+              <div
+                v-else
+                class="spinner-border text-light"
+                style="width: 1.5rem; height: 1.5rem;"
+                role="status"
+              >
+                <span class="sr-only">Loading...</span>
+              </div>
+            </button>
           </div>
 
           <input style="display:none;" type="checkbox" id="details_toggler" />
@@ -176,7 +188,9 @@ export default {
     return {
       product: [],
       productSize: "",
-      cart: {}
+      cart: {},
+      cart_loading: false,
+      cart_text: "ADD TO CART"
     };
   },
   filters: {
@@ -194,31 +208,33 @@ export default {
   },
   methods: {
     addToCart() {
+      this.cart_loading = true;
       const id = this.product.id;
       const api = `${process.env.VUE_APP_API}api/abc3675878/cart`;
+
       // 篩選購物車中是否含有一樣的商品
       // const cartFilter = this.cart.data.carts.some(
       //   item => id == item.product.id
       // );
 
-      // if (cartFilter) {
-      //   const cart = {
-      //     product_id: id,
-      //     qty: 3
-      //   };
-      //   this.$http.post(api, { data: cart }).then(res => {
-      //     console.log(res.data);
-      //   });
-      // }
-
-      const cart = {
-        product_id: id,
-        product_size: this.productSize,
-        qty: 1
-      };
-      this.$http.post(api, { data: cart }).then(res => {
-        console.log(res.data);
-      });
+      // 若尺寸不等於空，才加購物車
+      if (this.productSize != "") {
+        const cart = {
+          product_id: id,
+          product_size: this.productSize,
+          qty: 1
+        };
+        this.$http.post(api, { data: cart }).then(res => {
+          console.log(res.data);
+          this.cart_loading = false;
+        });
+      } else {
+        this.cart_loading = false;
+        this.cart_text = "請先選擇尺寸!";
+        setTimeout(() => {
+          this.cart_text = "ADD TO CART";
+        }, 3000);
+      }
     }
   },
   created() {
@@ -250,13 +266,15 @@ export default {
   padding: 12px;
 
   .col-xl-6 {
-    padding-right: 0;
+    padding-right: 0px;
   }
 }
 
 .text_area {
   position: fixed;
   right: 0;
+  background-color: transparent;
+  z-index: 10;
 
   .title {
     font-size: 22px;
@@ -298,6 +316,11 @@ export default {
       -moz-appearance: none;
       -webkit-appearance: none;
       cursor: pointer;
+      transition: all 0.3s;
+      &:hover {
+        background-color: #000;
+        color: white;
+      }
     }
 
     button {
@@ -307,6 +330,20 @@ export default {
       transition: all 0.3s;
       &:hover {
         background-color: #000;
+        color: white;
+      }
+    }
+
+    .cart-active {
+      background-color: black;
+    }
+
+    .cartBtn {
+      transition: color 0.3s;
+      width: 100%;
+      height: 100%;
+      line-height: 40px;
+      &:hover {
         color: white;
       }
     }
@@ -407,7 +444,7 @@ input[type="radio"] {
 // RWD --------------------
 // RWD --------------------
 // RWD --------------------
-@media (max-width: 575.98px) {
+@media (max-width: 768px) {
   .slider-container {
     padding: 0;
     margin: 0;
