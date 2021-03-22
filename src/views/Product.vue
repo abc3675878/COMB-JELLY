@@ -224,9 +224,15 @@ export default {
           product_size: this.productSize,
           qty: 1
         };
+        // 成功加入購物車後
         this.$http.post(api, { data: cart }).then(res => {
           console.log(res.data);
+          // 按鈕旋轉圈圈停止
           this.cart_loading = false;
+          // 重新取得購物車
+          this.getCart();
+          // 打開購物車列表
+          this.$store.state.openCart = true;
         });
       } else {
         this.cart_loading = false;
@@ -235,6 +241,13 @@ export default {
           this.cart_text = "ADD TO CART";
         }, 3000);
       }
+    },
+    getCart() {
+      const api = `${process.env.VUE_APP_API}api/abc3675878/cart`;
+      this.$http.get(api).then(res => {
+        console.log("取得購物車", res.data);
+        this.cart = res.data;
+      });
     }
   },
   created() {
@@ -243,12 +256,6 @@ export default {
     this.$http.get(api).then(res => {
       console.log(res.data);
       this.product = res.data.product;
-    });
-
-    const api_cart = `${process.env.VUE_APP_API}api/abc3675878/cart`;
-    this.$http.get(api_cart).then(res => {
-      console.log("取得購物車列表", res.data);
-      this.cart = res.data;
     });
   }
 };

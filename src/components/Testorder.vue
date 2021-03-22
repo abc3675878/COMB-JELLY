@@ -298,7 +298,11 @@ export default {
         // 按查看更多時把id傳進來，v-if的id跟商品id一樣時就顯示讀取效果
         loadingItem: ""
       },
-      cart: {},
+      cart: {
+        data: {
+          carts: []
+        }
+      },
       coupon_code: "",
       form: {
         user: {

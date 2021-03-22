@@ -50,15 +50,12 @@
                 </div>
                 <div class="product-size">{{ item.product_size }}</div>
                 <div class="product-bottom d-flex justify-content-between">
-                  <div class="product-num d-flex">
-                    <button>
-                      <i class="fas fa-minus"></i>
-                    </button>
-                    <p class="text-center">1</p>
-                    <button>
-                      <i class="fas fa-plus"></i>
-                    </button>
-                  </div>
+                  <a
+                    href=""
+                    style="color: #aaa;"
+                    @click.prevent="deleteProduct(item.id)"
+                    >Delete</a
+                  >
                   <div class="product-price">
                     {{ item.product.price | currency }}
                   </div>
@@ -85,7 +82,6 @@
 export default {
   data() {
     return {
-      openCart: false,
       cart: {
         data: {
           carts: [],
@@ -107,11 +103,16 @@ export default {
       })}`;
     }
   },
+  computed: {
+    openCart() {
+      return this.$store.state.openCart;
+    }
+  },
   methods: {
     toggleCart() {
-      this.openCart = !this.openCart;
+      this.$store.state.openCart = !this.$store.state.openCart;
 
-      if (this.openCart) {
+      if (this.$store.state.openCart) {
         this.getCart();
       }
     },
@@ -121,7 +122,17 @@ export default {
         console.log("取得購物車", res.data);
         this.cart = res.data;
       });
+    },
+    deleteProduct(id) {
+      const api = `${process.env.VUE_APP_API}api/abc3675878/cart/${id}`;
+      this.$http.delete(api).then(res => {
+        console.log("刪除商品", res.data);
+        this.getCart();
+      });
     }
+  },
+  created() {
+    this.getCart();
   }
 };
 </script>
@@ -205,28 +216,28 @@ export default {
     padding-left: 10px;
   }
 
-  .product-num {
-    width: 50%;
-    border: 1px solid #e5e5e5;
-    p {
-      width: 50%;
-    }
-    button {
-      width: 25%;
-      border: none;
-      background-color: transparent;
-      &:nth-of-type(1) {
-        border-right: 1px solid #e5e5e5;
-      }
-      &:nth-of-type(2) {
-        border-left: 1px solid #e5e5e5;
-      }
-      i {
-        padding-left: 1px;
-        color: #000;
-      }
-    }
-  }
+  // .product-num {
+  //   width: 50%;
+  // border: 1px solid #e5e5e5;
+  //   p {
+  //     width: 50%;
+  //   }
+  //   button {
+  //     width: 25%;
+  //     border: none;
+  //     background-color: transparent;
+  //     &:nth-of-type(1) {
+  //       border-right: 1px solid #e5e5e5;
+  //     }
+  //     &:nth-of-type(2) {
+  //       border-left: 1px solid #e5e5e5;
+  //     }
+  //     i {
+  //       padding-left: 1px;
+  //       color: #000;
+  //     }
+  //   }
+  // }
 }
 
 .cart-bottom {
