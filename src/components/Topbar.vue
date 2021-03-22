@@ -46,7 +46,7 @@
                 <div style="font-weight:bold;" class="product-title">
                   {{ item.product.title }}
                 </div>
-                <div class="product-size">S</div>
+                <div class="product-size">{{ item.product_size }}</div>
                 <div class="product-bottom d-flex justify-content-between">
                   <div class="product-num d-flex">
                     <button>

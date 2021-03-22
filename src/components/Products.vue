@@ -232,15 +232,94 @@
                 />
               </div>
               <div class="col-sm-12">
-                <div class="form-group">
-                  <label for="title">標題</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="title"
-                    placeholder="請輸入標題"
-                    v-model="tempProduct.title"
-                  />
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="title">標題</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="title"
+                      placeholder="請輸入標題"
+                      v-model="tempProduct.title"
+                    />
+                  </div>
+                  <div
+                    class="col-md-6 d-flex align-items-center justify-content-center"
+                  >
+                    <div>尺寸:</div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="inlineCheckbox"
+                        value="XS"
+                        v-model="tempProduct.size"
+                      />
+                      <label class="form-check-label" for="inlineCheckbox"
+                        >XS</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="inlineCheckbox1"
+                        value="S"
+                        v-model="tempProduct.size"
+                      />
+                      <label class="form-check-label" for="inlineCheckbox1"
+                        >S</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="inlineCheckbox2"
+                        value="M"
+                        v-model="tempProduct.size"
+                      />
+                      <label class="form-check-label" for="inlineCheckbox2"
+                        >M</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="inlineCheckbox3"
+                        value="L"
+                        v-model="tempProduct.size"
+                      />
+                      <label class="form-check-label" for="inlineCheckbox3"
+                        >L</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="inlineCheckbox4"
+                        value="XL"
+                        v-model="tempProduct.size"
+                      />
+                      <label class="form-check-label" for="inlineCheckbox4"
+                        >XL</label
+                      >
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        id="inlineCheckbox5"
+                        value="F"
+                        v-model="tempProduct.size"
+                      />
+                      <label class="form-check-label" for="inlineCheckbox5"
+                        >F</label
+                      >
+                    </div>
+                  </div>
                 </div>
 
                 <div class="form-row">
@@ -437,7 +516,9 @@ export default {
     return {
       products: [],
       // 新增商品的欄位全綁定進來
-      tempProduct: {},
+      tempProduct: {
+        size: [],
+      },
       // 儲存商品的分頁顯示
       pagination: {},
       isNew: false,
@@ -477,7 +558,9 @@ export default {
     // 點按鈕時傳值進來 item是v-for遍歷的每個物件
     openModal(isNew, item) {
       if (isNew) {
-        this.tempProduct = {};
+        this.tempProduct = {
+          size: [],
+        };
         this.isNew = true;
       } else {
         // 使用 Object.assign 來複製一個item給tempProduct

@@ -111,13 +111,13 @@
             {{ product.description }}
           </div>
           <div class="button d-flex justify-content-between">
-            <select name="SIZE" id="SIZE">
+            <select v-model="productSize" name="SIZE" id="SIZE">
               <option value="" selected disabled>
                 SELECT SIZE
               </option>
-              <option value="S">S</option>
-              <option value="M">M</option>
-              <option value="L">L</option>
+              <option v-for="size in product.size" :key="size" :value="size">{{
+                size
+              }}</option>
             </select>
             <button @click="addToCart">ADD TO CART</button>
           </div>
@@ -125,7 +125,11 @@
           <input style="display:none;" type="checkbox" id="details_toggler" />
           <input style="display:none;" type="checkbox" id="details_toggler2" />
 
-          <label for="details_toggler" class="details_toggler details_toggler1">
+          <label
+            style="cursor:pointer;"
+            for="details_toggler"
+            class="details_toggler details_toggler1"
+          >
             <div class="details_title">DETAILS</div>
             <div class="details_button details_button1">
               <span></span>
@@ -133,11 +137,12 @@
             </div>
           </label>
 
-          <div class="details">
-            {{ product.content }}
+          <div class="details" v-html="product.content">
+            <!-- {{ product.content }} -->
           </div>
 
           <label
+            style="cursor:pointer;"
             for="details_toggler2"
             class="details_toggler details_toggler2"
           >
@@ -169,7 +174,9 @@ export default {
   },
   data() {
     return {
-      product: []
+      product: [],
+      productSize: "",
+      cart: {}
     };
   },
   filters: {
@@ -187,10 +194,26 @@ export default {
   },
   methods: {
     addToCart() {
-      const api = `${process.env.VUE_APP_API}api/abc3675878/cart`;
       const id = this.product.id;
+      const api = `${process.env.VUE_APP_API}api/abc3675878/cart`;
+      // 篩選購物車中是否含有一樣的商品
+      // const cartFilter = this.cart.data.carts.some(
+      //   item => id == item.product.id
+      // );
+
+      // if (cartFilter) {
+      //   const cart = {
+      //     product_id: id,
+      //     qty: 3
+      //   };
+      //   this.$http.post(api, { data: cart }).then(res => {
+      //     console.log(res.data);
+      //   });
+      // }
+
       const cart = {
         product_id: id,
+        product_size: this.productSize,
         qty: 1
       };
       this.$http.post(api, { data: cart }).then(res => {
@@ -204,6 +227,12 @@ export default {
     this.$http.get(api).then(res => {
       console.log(res.data);
       this.product = res.data.product;
+    });
+
+    const api_cart = `${process.env.VUE_APP_API}api/abc3675878/cart`;
+    this.$http.get(api_cart).then(res => {
+      console.log("取得購物車列表", res.data);
+      this.cart = res.data;
     });
   }
 };
