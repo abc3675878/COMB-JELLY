@@ -70,7 +70,13 @@
               <p>Subtotal</p>
               <p>{{ cart.data.total | currency }}</p>
             </div>
-            <button>CHECKOUT</button>
+            <button
+              :class="{ disabledBtn: this.disabled }"
+              @click="checkout"
+              :disabled="this.disabled"
+            >
+              CHECKOUT
+            </button>
           </div>
         </div>
       </div>
@@ -82,6 +88,7 @@
 export default {
   data() {
     return {
+      disabled: false,
       cart: {
         data: {
           carts: [],
@@ -123,6 +130,11 @@ export default {
       this.$http.get(api).then(res => {
         console.log("取得購物車", res.data);
         this.cart = res.data;
+        if (this.cart.data.carts.length === 0) {
+          this.disabled = true;
+        } else {
+          this.disabled = false;
+        }
       });
     },
     deleteProduct(id) {
@@ -131,7 +143,8 @@ export default {
         console.log("刪除商品", res.data);
         this.getCart();
       });
-    }
+    },
+    checkout() {}
   },
   created() {
     this.getCart();
@@ -252,6 +265,16 @@ export default {
       background: #000;
       color: white;
     }
+  }
+}
+
+.disabledBtn {
+  color: #aaa;
+  border: 1px solid #aaa !important;
+  &:hover {
+    color: #aaa !important;
+    border: 1px solid #aaa !important;
+    background-color: #fff !important;
   }
 }
 </style>
