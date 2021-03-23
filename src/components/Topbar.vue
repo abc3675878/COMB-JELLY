@@ -16,7 +16,7 @@
           <li>SEARCH</li>
         </div>
         <div class="cart" @click.prevent="toggleCart">
-          <a href="">CART</a>
+          <a href="">CART({{ this.cart.data.carts.length }})</a>
         </div>
         <div
           class="side-cart d-flex flex-column justify-content-between"
@@ -33,7 +33,7 @@
           </div>
 
           <!-- 購物車內容 -->
-          <div class="cart-content h-75">
+          <div v-if="this.cart.data.carts.length > 0" class="cart-content h-75">
             <div
               v-for="item in cart.data.carts"
               :key="item.id"
@@ -62,6 +62,12 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div
+            v-else
+            class="cart-content h-75 d-flex justify-content-center align-items-center"
+          >
+            YOUR SHOPPING CART IS EMPTY.
           </div>
 
           <!-- 購物車底部 -->
@@ -144,7 +150,9 @@ export default {
         this.getCart();
       });
     },
-    checkout() {}
+    checkout() {
+      this.$router.push("/checkout");
+    }
   },
   created() {
     this.getCart();
