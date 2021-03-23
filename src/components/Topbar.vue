@@ -104,14 +104,16 @@ export default {
     }
   },
   computed: {
+    // 取得Vux中資料
     openCart() {
       return this.$store.state.openCart;
     }
   },
   methods: {
+    // 控制購物車開關
     toggleCart() {
       this.$store.state.openCart = !this.$store.state.openCart;
-
+      // 購物車打開後取得購物車列表
       if (this.$store.state.openCart) {
         this.getCart();
       }
@@ -184,9 +186,6 @@ export default {
   transform: translateX(100%);
   transition: all 0.3s ease-in-out;
   font-size: 12px;
-  // border-left: 1px solid black;
-  // border-top: 1px solid black;
-  // border-bottom: 1px solid black;
 }
 
 .toggle {

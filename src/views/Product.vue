@@ -1,6 +1,6 @@
 <template>
   <div>
-    <topbar></topbar>
+    <topbar ref="topbar"></topbar>
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 col-md-8">
@@ -189,6 +189,7 @@ export default {
       product: [],
       productSize: "",
       cart: {},
+      // ADD TO CART 按鈕旋轉圈圈
       cart_loading: false,
       cart_text: "ADD TO CART"
     };
@@ -208,14 +209,10 @@ export default {
   },
   methods: {
     addToCart() {
+      // 按鈕旋轉圈圈啟動
       this.cart_loading = true;
       const id = this.product.id;
       const api = `${process.env.VUE_APP_API}api/abc3675878/cart`;
-
-      // 篩選購物車中是否含有一樣的商品
-      // const cartFilter = this.cart.data.carts.some(
-      //   item => id == item.product.id
-      // );
 
       // 若尺寸不等於空，才加購物車
       if (this.productSize != "") {
@@ -229,10 +226,9 @@ export default {
           console.log(res.data);
           // 按鈕旋轉圈圈停止
           this.cart_loading = false;
-          // 重新取得購物車
-          this.getCart();
-          // 打開購物車列表
-          // this.$store.state.openCart = true;
+          // 取得topbar內的購物車資料
+          this.$refs.topbar.getCart();
+          // 用Vuex操作購物車側邊欄
           this.$store.dispatch("updateOpenCart", true);
         });
       } else {
@@ -242,6 +238,11 @@ export default {
           this.cart_text = "ADD TO CART";
         }, 3000);
       }
+
+      // 篩選購物車中是否含有一樣的商品
+      // const cartFilter = this.cart.data.carts.some(
+      //   item => id == item.product.id
+      // );
     },
     getCart() {
       const api = `${process.env.VUE_APP_API}api/abc3675878/cart`;
@@ -252,6 +253,7 @@ export default {
     }
   },
   created() {
+    // 取得單一商品資料
     const id = this.$route.params.id;
     const api = `${process.env.VUE_APP_API}api/abc3675878/product/${id}`;
     this.$http.get(api).then(res => {
