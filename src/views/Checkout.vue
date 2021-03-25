@@ -145,8 +145,19 @@
             <!-- 購物車底部 -->
             <div class="cart-bottom h-25">
               <div class="cart-price d-flex justify-content-between">
-                <input type="text" class="w-75" placeholder="Discount Code" />
-                <button style="font-size: 12px" class="w-25">APPLY</button>
+                <input
+                  type="text"
+                  class="w-75"
+                  placeholder="Discount Code"
+                  v-model="discountCode"
+                />
+                <button
+                  style="font-size: 12px"
+                  class="w-25"
+                  @click="addDiscount"
+                >
+                  APPLY
+                </button>
               </div>
               <hr />
               <div class="cart-price d-flex justify-content-between">
@@ -220,6 +231,16 @@ export default {
       this.$http.get(api).then(res => {
         console.log("取得購物車", res.data);
         this.cart = res.data;
+      });
+    },
+    addDiscount() {
+      const api = `${process.env.VUE_APP_API}api/abc3675878/coupon`;
+      const discount_code = {
+        code: this.discountCode
+      };
+
+      this.$http.post(api, { data: discount_code }).then(res => {
+        console.log("套用優惠券", res.data);
       });
     }
   },

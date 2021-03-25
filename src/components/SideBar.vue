@@ -24,7 +24,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" to="/dashboard/coupons">
+            <router-link class="nav-link" to="/dashboard/coupon">
               <span data-feather="file-text"></span>
               優惠券
             </router-link>

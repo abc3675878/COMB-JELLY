@@ -60,8 +60,31 @@ const routes = [
           )
       },
       {
+        path: "orders",
+        name: "Orders",
+        // 驗證判斷也須放到子層
+        meta: {
+          requiresAuth: true
+        },
+        component: () =>
+          import(/* webpackChunkName: "products" */ "../components/Orders.vue")
+      },
+      {
+        path: "coupon",
+        name: "Coupon",
+        // 驗證判斷也須放到子層
+        meta: {
+          requiresAuth: true
+        },
+        component: () =>
+          import(/* webpackChunkName: "products" */ "../components/Coupon.vue")
+      },
+      {
         path: "testorder",
         name: "Testorder",
+        meta: {
+          requiresAuth: false
+        },
         component: () =>
           import(
             /* webpackChunkName: "products" */ "../components/Testorder.vue"
@@ -71,6 +94,9 @@ const routes = [
         // 結帳頁記得帶入 orderId ，冒號為動態綁定參數
         path: "checkout/:orderId",
         name: "Checkout",
+        meta: {
+          requiresAuth: false
+        },
         component: () =>
           import(
             /* webpackChunkName: "products" */ "../components/Checkout.vue"
