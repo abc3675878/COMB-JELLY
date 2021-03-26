@@ -12,11 +12,11 @@
         新增優惠券
       </a>
     </p>
-    <div class="collapse" id="collapseExample">
+    <div class="collapse createConfirm" id="collapseExample">
       <div class="card card-body">
         <form>
           <div class="form-row">
-            <div class="col">
+            <div class="col d-flex align-items-center justify-content-center">
               <input
                 class="form-control"
                 type="text"
@@ -24,7 +24,7 @@
                 v-model="title"
               />
             </div>
-            <div class="col-1">
+            <div class="col-1 d-flex align-items-center justify-content-center">
               <input
                 class="form-control"
                 type="text"
@@ -32,7 +32,7 @@
                 v-model="percent"
               />
             </div>
-            <div class="col">
+            <div class="col d-flex align-items-center justify-content-center">
               <input
                 class="form-control"
                 type="text"
@@ -59,11 +59,11 @@
               <input id="date" type="datetime-local" v-model="due_date" />
               <label for="date">到期日</label>
             </div>
-            <div class="col-2">
+            <div class="col-1 d-flex align-items-center justify-content-center">
               <button
                 @click="createCoupon"
                 type="submit"
-                class="btn btn-primary w-100"
+                class="btn btn-primary"
               >
                 新增
               </button>
@@ -84,8 +84,8 @@
           <th scope="col">修改</th>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for="item in this.couponList.coupons" :key="item.id">
+      <tbody v-for="item in this.couponList.coupons" :key="item.id">
+        <tr>
           <td>{{ item.title }}</td>
           <td>{{ item.code }}</td>
           <td>{{ item.percent }}</td>
@@ -102,9 +102,115 @@
           </td>
           <td>{{ item.due_date }}</td>
           <td>
-            <button class="btn btn-primary">
+            <button
+              class="btn btn-primary"
+              type="button"
+              data-toggle="collapse"
+              :data-target="'#' + item.id"
+            >
               修改
             </button>
+          </td>
+        </tr>
+        <!-- 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位-->
+        <!-- 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位-->
+        <!-- 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位-->
+        <!-- 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位-->
+        <!-- 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位-->
+        <!-- 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位-->
+        <!-- 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位-->
+        <!-- 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位 修改欄位-->
+        <tr>
+          <td colspan="6" class="border-0">
+            <div class="collapse updateConfirm" :id="item.id">
+              <div class="card card-body">
+                <form>
+                  <div class="form-row">
+                    <div
+                      class="col-1 d-flex align-items-center justify-content-center"
+                    >
+                      <button
+                        type="button"
+                        class="close"
+                        @click="deleteCoupon(item.id)"
+                      >
+                        <span aria-hidden="true" class="font-weight-bold"
+                          >&times; 刪除</span
+                        >
+                      </button>
+                    </div>
+                    <div
+                      class="col d-flex align-items-center justify-content-center"
+                    >
+                      <input
+                        class="form-control"
+                        type="text"
+                        placeholder="優惠券名稱"
+                        v-model="item.title"
+                      />
+                    </div>
+                    <div
+                      class="col-1 d-flex align-items-center justify-content-center"
+                    >
+                      <input
+                        class="form-control"
+                        type="text"
+                        placeholder="折數"
+                        v-model="item.percent"
+                      />
+                    </div>
+                    <div
+                      class="col d-flex align-items-center justify-content-center"
+                    >
+                      <input
+                        class="form-control"
+                        type="text"
+                        placeholder="優惠券代碼"
+                        v-model="item.code"
+                      />
+                    </div>
+                    <div
+                      class="col-1 d-flex align-items-center justify-content-center"
+                    >
+                      <div class="custom-control custom-switch">
+                        <input
+                          type="checkbox"
+                          class="custom-control-input"
+                          :id="'check' + item.id"
+                          v-model="item.is_enabled"
+                        />
+                        <label
+                          class="custom-control-label"
+                          :for="'check' + item.id"
+                          >啟用</label
+                        >
+                      </div>
+                    </div>
+                    <div
+                      class="col d-flex align-items-center justify-content-center flex-column"
+                    >
+                      <input
+                        :id="'date' + item.id"
+                        type="datetime-local"
+                        v-model="item.due_date"
+                      />
+                      <label :for="'date' + item.id">到期日</label>
+                    </div>
+                    <div
+                      class="col-1 d-flex align-items-center justify-content-center"
+                    >
+                      <button
+                        @click="updateCoupon(item)"
+                        type="submit"
+                        class="btn btn-dark"
+                      >
+                        確認
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -113,6 +219,8 @@
 </template>
 
 <script>
+import $ from "jquery";
+
 export default {
   data() {
     return {
@@ -121,14 +229,15 @@ export default {
       percent: 0,
       due_date: "",
       code: "",
-      couponList: []
+      couponList: {}
+      // updateCouponList: {}
     };
   },
-  computed: {
-    changeDate() {
-      return Date.parse(this.due_date) / 1000;
-    }
-  },
+  // computed: {
+  //   updateCouponList() {
+  //     return Object.assign({}, this.couponList)
+  //   }
+  // },
   methods: {
     createCoupon() {
       const api = `${process.env.VUE_APP_API}api/abc3675878/admin/coupon`;
@@ -136,11 +245,32 @@ export default {
         title: this.title,
         is_enabled: this.is_enabled,
         percent: this.percent,
-        due_date: this.changeDate,
+        due_date: this.due_date,
         code: this.code
       };
       this.$http.post(api, { data: discount_code }).then(res => {
+        $(".createConfirm").collapse("hide");
         console.log("新增優惠券", res.data);
+        this.getCoupon();
+        this.title = "";
+        this.is_enabled = "";
+        this.percent = "";
+        this.due_date = "";
+        this.code = "";
+      });
+    },
+    updateCoupon(item) {
+      const api = `${process.env.VUE_APP_API}api/abc3675878/admin/coupon/${item.id}`;
+      this.$http.put(api, { data: item }).then(res => {
+        console.log("修改優惠券", res.data);
+        $(".updateConfirm").collapse("hide");
+        this.getCoupon();
+      });
+    },
+    deleteCoupon(id) {
+      const api = `${process.env.VUE_APP_API}api/abc3675878/admin/coupon/${id}`;
+      this.$http.delete(api).then(res => {
+        console.log("刪除優惠券", res.data);
         this.getCoupon();
       });
     },
@@ -157,3 +287,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+* {
+  font-size: 14px !important;
+}
+</style>

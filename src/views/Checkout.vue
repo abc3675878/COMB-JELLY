@@ -144,7 +144,10 @@
 
             <!-- 購物車底部 -->
             <div class="cart-bottom h-25">
-              <div class="cart-price d-flex justify-content-between">
+              <div
+                v-if="cart.data.total === cart.data.final_total"
+                class="cart-price d-flex justify-content-between"
+              >
                 <input
                   type="text"
                   class="w-75"
@@ -159,21 +162,26 @@
                   APPLY
                 </button>
               </div>
+              <div v-else class="w-100 bg-danger text-center p-1">
+                <span class="text-white"
+                  >已套用優惠券 {{ cart.data.carts[0].coupon.code }}</span
+                >
+              </div>
               <hr />
               <div class="cart-price d-flex justify-content-between">
                 <p>Subtotal</p>
                 <p>{{ cart.data.total | currency }}</p>
               </div>
               <div
-                style="color:#ff0000;"
+                v-if="cart.data.total !== cart.data.final_total"
                 class="cart-price d-flex justify-content-between"
               >
-                <p>Discount</p>
-                <p>- {{ cart.data.total | currency }}</p>
+                <p style="color:#ff0000;">Discount</p>
+                <p style="color:#ff0000;">- {{ discountValue | currency }}</p>
               </div>
               <div class="cart-price d-flex justify-content-between">
                 <p>Total</p>
-                <p>{{ cart.data.total | currency }}</p>
+                <p>{{ cart.data.final_total | currency }}</p>
               </div>
               <button
                 :disabled="invalid"
@@ -208,7 +216,8 @@ export default {
       address: "",
       phoneNumber: "",
       specialInstructions: "",
-      discountCode: ""
+      discountCode: "",
+      discountConfirm: {}
     };
   },
   filters: {
@@ -222,6 +231,11 @@ export default {
             : c;
         return currency;
       })}`;
+    }
+  },
+  computed: {
+    discountValue() {
+      return this.cart.data.total - this.cart.data.final_total;
     }
   },
   methods: {
@@ -241,6 +255,7 @@ export default {
 
       this.$http.post(api, { data: discount_code }).then(res => {
         console.log("套用優惠券", res.data);
+        this.discountConfirm = res.data;
       });
     }
   },
