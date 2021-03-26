@@ -18,25 +18,31 @@ const routes = [
     path: "/login",
     name: "Login",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/Login.vue")
+      import(/* webpackChunkName: "Login" */ "../views/Login.vue")
   },
   {
     path: "/checkout",
     name: "Checkout",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/Checkout.vue")
+      import(/* webpackChunkName: "Checkout" */ "../views/Checkout.vue")
+  },
+  {
+    path: "/checkout/:id",
+    name: "Order",
+    component: () =>
+      import(/* webpackChunkName: "Order" */ "../views/Order.vue")
   },
   {
     path: "/products",
     name: "Products",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/Products.vue")
+      import(/* webpackChunkName: "Products" */ "../views/Products.vue")
   },
   {
     path: "/products/:id",
     name: "Product",
     component: () =>
-      import(/* webpackChunkName: "login" */ "../views/Product.vue")
+      import(/* webpackChunkName: "Product" */ "../views/Product.vue")
   },
   {
     path: "/dashboard",
@@ -56,7 +62,7 @@ const routes = [
         },
         component: () =>
           import(
-            /* webpackChunkName: "products" */ "../components/Products.vue"
+            /* webpackChunkName: "dashboard_products" */ "../components/Products.vue"
           )
       },
       {
@@ -67,7 +73,9 @@ const routes = [
           requiresAuth: true
         },
         component: () =>
-          import(/* webpackChunkName: "products" */ "../components/Orders.vue")
+          import(
+            /* webpackChunkName: "dashboard_orders" */ "../components/Orders.vue"
+          )
       },
       {
         path: "coupon",
@@ -77,7 +85,9 @@ const routes = [
           requiresAuth: true
         },
         component: () =>
-          import(/* webpackChunkName: "products" */ "../components/Coupon.vue")
+          import(
+            /* webpackChunkName: "dashboard_coupon" */ "../components/Coupon.vue"
+          )
       },
       {
         path: "testorder",
@@ -87,7 +97,7 @@ const routes = [
         },
         component: () =>
           import(
-            /* webpackChunkName: "products" */ "../components/Testorder.vue"
+            /* webpackChunkName: "dashboard_testorder" */ "../components/Testorder.vue"
           )
       },
       {
@@ -99,7 +109,7 @@ const routes = [
         },
         component: () =>
           import(
-            /* webpackChunkName: "products" */ "../components/Checkout.vue"
+            /* webpackChunkName: "dashboard_checkout" */ "../components/Checkout.vue"
           )
       }
     ]

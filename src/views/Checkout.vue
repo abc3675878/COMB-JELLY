@@ -239,7 +239,25 @@ export default {
     }
   },
   methods: {
-    placeOrder() {},
+    placeOrder() {
+      const api = `${process.env.VUE_APP_API}api/abc3675878/order`;
+      const order = {
+        user: {
+          name: this.fullName,
+          email: this.email,
+          tel: this.phoneNumber,
+          address: this.address
+        },
+        message: this.specialInstructions
+      };
+      this.$http.post(api, { data: order }).then(res => {
+        console.log("送出訂單", res.data);
+        const orderId = res.data.orderId;
+        if (res.data.success) {
+          this.$router.push({ name: "Order", params: { id: orderId } });
+        }
+      });
+    },
     getCart() {
       const api = `${process.env.VUE_APP_API}api/abc3675878/cart`;
       this.$http.get(api).then(res => {
@@ -256,6 +274,7 @@ export default {
       this.$http.post(api, { data: discount_code }).then(res => {
         console.log("套用優惠券", res.data);
         this.discountConfirm = res.data;
+        this.getCart();
       });
     }
   },
