@@ -26,7 +26,7 @@
               <img class="img-fluid" :src="product.imageUrl" alt="" />
               <div class="title mt-2 mb-4">
                 <div class="product_title">{{ product.title }}</div>
-                <div class="price">{{ product.price }}</div>
+                <div class="price">{{ product.price | currency }}</div>
               </div>
             </div>
           </div>
@@ -60,6 +60,19 @@ export default {
       console.log(res.data);
       this.products = res.data.products;
     });
+  },
+  filters: {
+    // 價格千分號
+    currency: function(num) {
+      const n = Number(num);
+      return `¥ ${n.toFixed(0).replace(/./g, (c, i, a) => {
+        const currency =
+          i && c !== "." && (a.length - i) % 3 === 0
+            ? `, ${c}`.replace(/\s/g, "")
+            : c;
+        return currency;
+      })}`;
+    }
   }
 };
 </script>
