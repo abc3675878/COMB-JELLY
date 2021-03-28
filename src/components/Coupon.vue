@@ -1,6 +1,7 @@
 <template>
   <div>
-    <p>
+    <h1>優惠券</h1>
+    <p class="text-right">
       <a
         class="btn btn-primary"
         data-toggle="collapse"
@@ -289,7 +290,7 @@ export default {
 </script>
 
 <style scoped>
-* {
+*:not(h1) {
   font-size: 14px !important;
 }
 </style>

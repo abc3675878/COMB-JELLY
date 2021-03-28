@@ -1,6 +1,7 @@
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
+    <h1>產品列表</h1>
     <div class="text-right mt-4">
       <!-- Button trigger modal -->
       <button class="btn btn-dark" @click="openModal(true)">
@@ -532,7 +533,7 @@ export default {
     // 價格千分號
     currency: function(num) {
       const n = Number(num);
-      return `$${n.toFixed(0).replace(/./g, (c, i, a) => {
+      return `¥ ${n.toFixed(0).replace(/./g, (c, i, a) => {
         const currency = (i && c !== '.' && ((a.length - i) % 3 === 0) ? `, ${c}`.replace(/\s/g, '') : c);
         return currency;
       })}`;
