@@ -13,7 +13,6 @@
           </li>
           <li>SALE</li>
           <li>INFO</li>
-          <li>SEARCH</li>
         </div>
         <div class="cart" @click.prevent="toggleCart">
           <a href="">CART({{ this.cart.data.carts.length }})</a>

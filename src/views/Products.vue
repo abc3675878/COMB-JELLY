@@ -4,6 +4,18 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-3 d-none d-sm-block">
+          <h1>SEARCH</h1>
+          <div class="search">
+            <i class="fas fa-search"></i>
+            <input
+              type="search"
+              v-model="search"
+              name=""
+              id=""
+              placeholder="Search products..."
+            />
+          </div>
+
           <h1>CATEGORIES</h1>
           <ul>
             <li>ALL</li>
@@ -11,7 +23,6 @@
             <li>TOP</li>
             <li>BOTTOM</li>
             <li>DRESS</li>
-            <li>ACCESSORIES</li>
             <li>SALE</li>
           </ul>
         </div>
@@ -19,7 +30,7 @@
           <div class="row">
             <div
               class="col-6 col-sm-4 product_hover"
-              v-for="product in products"
+              v-for="product in filterProducts"
               :key="product.id"
               @click="toProduct(product.id)"
             >
@@ -45,21 +56,36 @@ export default {
   },
   data() {
     return {
-      products: []
+      products: [],
+      search: ""
     };
+  },
+  computed: {
+    filterProducts() {
+      let products = this.products;
+      // 若搜尋欄為空 就顯示全部商品
+      if (this.search === "") {
+        return products;
+      } else {
+        return products.filter(product => product.title.match(this.search));
+      }
+    }
   },
   methods: {
     // 點擊後轉到商品頁面
     toProduct(id) {
       this.$router.push(`/products/${id}`);
+    },
+    getProducts() {
+      const api = `${process.env.VUE_APP_API}api/abc3675878/products/all`;
+      this.$http.get(api).then(res => {
+        console.log(res.data);
+        this.products = res.data.products;
+      });
     }
   },
   created() {
-    const api = `${process.env.VUE_APP_API}api/abc3675878/products/all`;
-    this.$http.get(api).then(res => {
-      console.log(res.data);
-      this.products = res.data.products;
-    });
+    this.getProducts();
   },
   filters: {
     // 價格千分號
@@ -102,5 +128,27 @@ ul li {
 
 .product_hover:hover {
   cursor: pointer;
+}
+
+.search {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #181818;
+  width: 150px;
+
+  i {
+    line-height: 30px;
+    vertical-align: middle;
+    margin-right: 5px;
+  }
+}
+
+input {
+  border: none;
+  text-indent: 5px;
+  // border-bottom: 1px solid #181818;
+  // padding-bottom: 2px;
+  font-size: 12px !important;
+  width: 125px;
+  height: 30px;
 }
 </style>
