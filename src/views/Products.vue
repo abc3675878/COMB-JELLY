@@ -27,7 +27,13 @@
           </ul>
         </div>
         <div class="col-sm-9 col-12">
-          <div class="row">
+          <div class="row h-100">
+            <div
+              v-if="this.filterProducts == ''"
+              class="col d-flex align-items-center justify-content-center"
+            >
+              No products matching the search.
+            </div>
             <div
               class="col-6 col-sm-4 product_hover"
               v-for="product in filterProducts"
