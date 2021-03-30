@@ -4,27 +4,26 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-3 d-none d-sm-block">
-          <h1>SEARCH</h1>
-          <div class="search">
-            <i class="fas fa-search"></i>
-            <input
-              type="search"
-              v-model="search"
-              name=""
-              id=""
-              placeholder="Search products..."
-            />
-          </div>
+          <div style="position: fixed">
+            <h1>SEARCH</h1>
+            <div class="search">
+              <i class="fas fa-search"></i>
+              <input
+                type="search"
+                v-model="search"
+                name=""
+                id=""
+                placeholder="Search products..."
+              />
+            </div>
 
-          <h1>CATEGORIES</h1>
-          <ul>
-            <li>ALL</li>
-            <li>OUTERWEAR</li>
-            <li>TOP</li>
-            <li>BOTTOM</li>
-            <li>DRESS</li>
-            <li>SALE</li>
-          </ul>
+            <h1>CATEGORIES</h1>
+            <ul>
+              <li v-for="category in categories" :key="category">
+                {{ category }}
+              </li>
+            </ul>
+          </div>
         </div>
         <div class="col-sm-9 col-12">
           <div class="row h-100">
@@ -49,20 +48,24 @@
           </div>
         </div>
       </div>
+      <Footer></Footer>
     </div>
   </div>
 </template>
 
 <script>
 import Topbar from "@/components/Topbar.vue";
+import Footer from "@/components/Footer.vue";
 
 export default {
   components: {
-    Topbar
+    Topbar,
+    Footer
   },
   data() {
     return {
       products: [],
+      categories: ["ALL", "OUTERWEAR", "TOP", "BOTTOM", "DRESS", "SALE"],
       search: ""
     };
   },
@@ -71,9 +74,11 @@ export default {
       let products = this.products;
       // 若搜尋欄為空 就顯示全部商品
       if (this.search === "") {
-        return products;
+        return products.reverse();
       } else {
-        return products.filter(product => product.title.match(this.search));
+        return products
+          .reverse()
+          .filter(product => product.title.match(this.search));
       }
     }
   },
