@@ -19,8 +19,15 @@
 
             <h1>CATEGORIES</h1>
             <ul>
-              <li v-for="category in categories" :key="category">
-                {{ category }}
+              <li
+                @click.prevent="filterCategory(category)"
+                class="categories_nav"
+                v-for="category in categories"
+                :key="category"
+              >
+                <a href="#">
+                  {{ category }}
+                </a>
               </li>
             </ul>
           </div>
@@ -28,6 +35,7 @@
         <div class="col-sm-9 col-12">
           <div class="row h-100">
             <div
+              style="height: 500px;"
               v-if="this.filterProducts == ''"
               class="col d-flex align-items-center justify-content-center"
             >
@@ -42,7 +50,23 @@
               <img class="img-fluid" :src="product.imageUrl" alt="" />
               <div class="title mt-2 mb-4">
                 <div class="product_title">{{ product.title }}</div>
-                <div class="price">{{ product.price | currency }}</div>
+                <div class="d-flex">
+                  <div
+                    style="color: #ff0000;"
+                    v-if="product.price !== product.origin_price"
+                    class="price mr-2"
+                  >
+                    {{ product.price | currency }}
+                  </div>
+                  <div
+                    class="price"
+                    :class="{
+                      deleteLine: product.price !== product.origin_price
+                    }"
+                  >
+                    {{ product.origin_price | currency }}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -65,6 +89,7 @@ export default {
   data() {
     return {
       products: [],
+      copyProducts: [],
       categories: ["ALL", "OUTERWEAR", "TOP", "BOTTOM", "DRESS", "SALE"],
       search: ""
     };
@@ -92,6 +117,22 @@ export default {
       this.$http.get(api).then(res => {
         console.log(res.data);
         this.products = res.data.products;
+      });
+    },
+    filterCategory(item) {
+      const api = `${process.env.VUE_APP_API}api/abc3675878/products/all`;
+      this.$http.get(api).then(res => {
+        if (item === "ALL") {
+          this.products = res.data.products;
+        } else if (item === "SALE") {
+          this.products = res.data.products
+            .reverse()
+            .filter(product => product.origin_price !== product.price);
+        } else {
+          this.products = res.data.products
+            .reverse()
+            .filter(product => product.category.match(item));
+        }
       });
     }
   },
@@ -134,7 +175,7 @@ h1 {
 
 ul li {
   font-size: 12px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 .product_hover:hover {
@@ -156,10 +197,28 @@ ul li {
 input {
   border: none;
   text-indent: 5px;
-  // border-bottom: 1px solid #181818;
-  // padding-bottom: 2px;
   font-size: 12px !important;
   width: 125px;
   height: 30px;
+}
+
+// 最後一個 li 中的 a
+.categories_nav:nth-last-child(1) > a {
+  color: #ff0000;
+}
+
+.deleteLine {
+  text-decoration: line-through;
+}
+
+// RWD
+@media (max-width: 768px) {
+  .product_hover:nth-child(odd) {
+    padding-right: 7.5px;
+  }
+
+  .product_hover:nth-child(even) {
+    padding-left: 7.5px;
+  }
 }
 </style>
