@@ -2,6 +2,13 @@
   <div>
     <topbar ref="topbar"></topbar>
     <div class="container-fluid">
+      <loading
+        :active.sync="isLoading"
+        :is-full-page="false"
+        opacity="0.8"
+        can-cancel="true"
+        loader="bars"
+      ></loading>
       <div class="row">
         <div class="col-12 col-md-8">
           <div class="row slider-container">
@@ -182,14 +189,18 @@
 <script>
 import Topbar from "@/components/Topbar.vue";
 import Footer from "@/components/Footer.vue";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default {
   components: {
     Topbar,
-    Footer
+    Footer,
+    Loading
   },
   data() {
     return {
+      isLoading: false,
       product: [],
       productSize: "",
       cart: {},
@@ -249,18 +260,22 @@ export default {
       // );
     },
     getCart() {
+      this.isLoading = true;
       const api = `${process.env.VUE_APP_API}api/abc3675878/cart`;
       this.$http.get(api).then(res => {
+        this.isLoading = false;
         console.log("取得購物車", res.data);
         this.cart = res.data;
       });
     }
   },
   created() {
+    this.isLoading = true;
     // 取得單一商品資料
     const id = this.$route.params.id;
     const api = `${process.env.VUE_APP_API}api/abc3675878/product/${id}`;
     this.$http.get(api).then(res => {
+      this.isLoading = false;
       console.log(res.data);
       this.product = res.data.product;
     });

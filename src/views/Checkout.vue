@@ -106,13 +106,18 @@
                 class="w-100"
               ></textarea>
             </div>
-
-            <!-- <p class="mt-3 m-0">Continue to shopping</p> -->
           </div>
           <div
             style="max-height: 600px;"
             class="col-12 col-md-5 bg_grey d-flex justify-content-between flex-column py-4 px-4 h-100"
           >
+            <loading
+              :active.sync="isLoading"
+              :is-full-page="false"
+              opacity="0.8"
+              can-cancel="true"
+              loader="bars"
+            ></loading>
             <!-- 購物車內容 -->
             <div class="cart-content h-75">
               <div
@@ -188,7 +193,23 @@
                 :class="{ disabledBtn: invalid }"
                 @click="placeOrder"
               >
-                PLACE ORDER
+                <div
+                  class="h-100 d-flex align-items-center justify-content-center"
+                  v-if="!cart_loading"
+                  :class="{ disabledBtn: invalid }"
+                  :disabled="invalid"
+                  style="color: white"
+                >
+                  PLACE ORDER
+                </div>
+                <div
+                  v-else
+                  class="spinner-border text-light"
+                  style="width: 1.5rem; height: 1.5rem;"
+                  role="status"
+                >
+                  <span class="sr-only">Loading...</span>
+                </div>
               </button>
             </div>
           </div>
@@ -202,9 +223,16 @@
 </template>
 
 <script>
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 export default {
+  components: {
+    Loading
+  },
   data() {
     return {
+      isLoading: false,
+      cart_loading: false,
       cart: {
         data: {
           carts: [],
@@ -240,6 +268,7 @@ export default {
   },
   methods: {
     placeOrder() {
+      this.cart_loading = true;
       const api = `${process.env.VUE_APP_API}api/abc3675878/order`;
       const order = {
         user: {
@@ -259,19 +288,23 @@ export default {
       });
     },
     getCart() {
+      this.isLoading = true;
       const api = `${process.env.VUE_APP_API}api/abc3675878/cart`;
       this.$http.get(api).then(res => {
+        this.isLoading = false;
         console.log("取得購物車", res.data);
         this.cart = res.data;
       });
     },
     addDiscount() {
+      this.isLoading = true;
       const api = `${process.env.VUE_APP_API}api/abc3675878/coupon`;
       const discount_code = {
         code: this.discountCode
       };
 
       this.$http.post(api, { data: discount_code }).then(res => {
+        this.isLoading = false;
         console.log("套用優惠券", res.data);
         this.discountConfirm = res.data;
         this.getCart();
@@ -340,7 +373,7 @@ input {
     background: #000 !important;
     background: transparent;
     transition: all 0.3s ease-in-out;
-    color: white;
+    color: white !important;
     &:hover {
       background: rgb(100, 100, 100) !important;
     }

@@ -21,6 +21,13 @@
           class="side-cart d-flex flex-column justify-content-between"
           :class="{ toggle: this.openCart }"
         >
+          <loading
+            :active.sync="isLoading"
+            :is-full-page="false"
+            opacity="0.8"
+            can-cancel="true"
+            loader="bars"
+          ></loading>
           <!-- 購物車頂部 -->
           <div class="cart-top d-flex justify-content-between">
             <div style="font-size:14px; font-weight:bold;" class="cart-title">
@@ -90,9 +97,16 @@
 </template>
 
 <script>
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
+
 export default {
+  components: {
+    Loading
+  },
   data() {
     return {
+      isLoading: false,
       disabled: false,
       cart: {
         data: {
@@ -131,8 +145,10 @@ export default {
       }
     },
     getCart() {
+      this.isLoading = true;
       const api = `${process.env.VUE_APP_API}api/abc3675878/cart`;
       this.$http.get(api).then(res => {
+        this.isLoading = false;
         console.log("取得購物車", res.data);
         this.cart = res.data;
         if (this.cart.data.carts.length === 0) {
@@ -143,8 +159,10 @@ export default {
       });
     },
     deleteProduct(id) {
+      this.isLoading = true;
       const api = `${process.env.VUE_APP_API}api/abc3675878/cart/${id}`;
       this.$http.delete(api).then(res => {
+        this.isLoading = false;
         console.log("刪除商品", res.data);
         this.getCart();
       });
@@ -175,7 +193,7 @@ export default {
   padding-top: 24px;
   position: fixed;
   background-color: white;
-  z-index: 9999;
+  z-index: 99999;
 }
 
 .logo {

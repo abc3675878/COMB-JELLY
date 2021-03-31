@@ -33,6 +33,13 @@
           </div>
         </div>
         <div class="col-sm-9 col-12">
+          <loading
+            :active.sync="isLoading"
+            :is-full-page="false"
+            opacity="0.8"
+            can-cancel="true"
+            loader="bars"
+          ></loading>
           <div class="row h-100">
             <div
               style="height: 500px;"
@@ -80,18 +87,22 @@
 <script>
 import Topbar from "@/components/Topbar.vue";
 import Footer from "@/components/Footer.vue";
+import Loading from "vue-loading-overlay";
+import "vue-loading-overlay/dist/vue-loading.css";
 
 export default {
   components: {
     Topbar,
-    Footer
+    Footer,
+    Loading
   },
   data() {
     return {
       products: [],
       copyProducts: [],
       categories: ["ALL", "OUTERWEAR", "TOP", "BOTTOM", "DRESS", "SALE"],
-      search: ""
+      search: "",
+      isLoading: false
     };
   },
   computed: {
@@ -113,15 +124,19 @@ export default {
       this.$router.push(`/products/${id}`);
     },
     getProducts() {
+      this.isLoading = true;
       const api = `${process.env.VUE_APP_API}api/abc3675878/products/all`;
       this.$http.get(api).then(res => {
+        this.isLoading = false;
         console.log(res.data);
         this.products = res.data.products;
       });
     },
     filterCategory(item) {
+      this.isLoading = true;
       const api = `${process.env.VUE_APP_API}api/abc3675878/products/all`;
       this.$http.get(api).then(res => {
+        this.isLoading = false;
         if (item === "ALL") {
           this.products = res.data.products;
         } else if (item === "SALE") {
