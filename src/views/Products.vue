@@ -36,8 +36,8 @@
           <loading
             :active.sync="isLoading"
             :is-full-page="false"
-            opacity="0.8"
-            can-cancel="true"
+            :opacity="0.8"
+            :can-cancel="true"
             loader="bars"
           ></loading>
           <div class="row h-100">
@@ -153,6 +153,7 @@ export default {
   },
   created() {
     this.getProducts();
+    document.title = this.$route.meta.title;
   },
   filters: {
     // 價格千分號

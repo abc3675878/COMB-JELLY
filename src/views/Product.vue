@@ -5,8 +5,8 @@
       <loading
         :active.sync="isLoading"
         :is-full-page="false"
-        opacity="0.8"
-        can-cancel="true"
+        :opacity="0.8"
+        :can-cancel="true"
         loader="bars"
       ></loading>
       <div class="row">
@@ -278,6 +278,7 @@ export default {
       this.isLoading = false;
       console.log(res.data);
       this.product = res.data.product;
+      document.title = `${this.product.title}  | COMB JELLY`;
     });
   }
 };

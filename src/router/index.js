@@ -12,31 +12,46 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    meta: {
+      title: "COMB JELLY"
+    }
   },
   {
     path: "/login",
     name: "Login",
     component: () =>
-      import(/* webpackChunkName: "Login" */ "../views/Login.vue")
+      import(/* webpackChunkName: "Login" */ "../views/Login.vue"),
+    meta: {
+      title: "Login"
+    }
   },
   {
     path: "/checkout",
     name: "Checkout",
     component: () =>
-      import(/* webpackChunkName: "Checkout" */ "../views/Checkout.vue")
+      import(/* webpackChunkName: "Checkout" */ "../views/Checkout.vue"),
+    meta: {
+      title: "Checkout | COMB JELLY"
+    }
   },
   {
     path: "/checkout/:id",
     name: "Order",
     component: () =>
-      import(/* webpackChunkName: "Order" */ "../views/Order.vue")
+      import(/* webpackChunkName: "Order" */ "../views/Order.vue"),
+    meta: {
+      title: "Order Confirm | COMB JELLY"
+    }
   },
   {
     path: "/products",
     name: "Products",
     component: () =>
-      import(/* webpackChunkName: "Products" */ "../views/Products.vue")
+      import(/* webpackChunkName: "Products" */ "../views/Products.vue"),
+    meta: {
+      title: "Products | COMB JELLY"
+    }
   },
   {
     path: "/products/:id",
@@ -48,7 +63,8 @@ const routes = [
     path: "/dashboard",
     name: "Dashboard",
     meta: {
-      requiresAuth: true
+      requiresAuth: true,
+      title: "Dashboard | COMB JELLY"
     },
     component: () =>
       import(/* webpackChunkName: "dashboard" */ "../views/Dashboard.vue"),

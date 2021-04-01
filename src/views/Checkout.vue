@@ -114,8 +114,8 @@
             <loading
               :active.sync="isLoading"
               :is-full-page="false"
-              opacity="0.8"
-              can-cancel="true"
+              :opacity="0.8"
+              :can-cancel="true"
               loader="bars"
             ></loading>
             <!-- 購物車內容 -->

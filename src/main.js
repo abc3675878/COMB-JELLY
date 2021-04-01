@@ -40,6 +40,9 @@ new Vue({
 }).$mount("#app");
 
 router.beforeEach((to, from, next) => {
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
   if (to.meta.requiresAuth) {
     const api = `${process.env.VUE_APP_API}api/user/check`;
     axios.post(api).then(res => {
