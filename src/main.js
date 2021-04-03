@@ -4,6 +4,8 @@ import router from "./router";
 import store from "./store";
 import axios from "axios";
 import VueAxios from "vue-axios";
+import VueAwesomeSwiper from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
 import "bootstrap";
 // 把event bus 掛載進來
 import "./bus";
@@ -28,6 +30,8 @@ Vue.component("ValidationObserver", ValidationObserver);
 Vue.component("ValidationProvider", ValidationProvider);
 
 Vue.use(VueAxios, axios);
+
+Vue.use(VueAwesomeSwiper);
 
 axios.defaults.withCredentials = true;
 

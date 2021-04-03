@@ -1,26 +1,22 @@
 <template>
   <div class="home">
     <Topbar></Topbar>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
-    <h1>123</h1>
+    <Swiper></Swiper>
     <Footer></Footer>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue'
 import Topbar from "@/components/Topbar.vue";
 import Footer from "@/components/Footer.vue";
+import Swiper from "@/components/Swiper.vue";
 
 export default {
   name: "Home",
   components: {
     Topbar,
-    Footer
+    Footer,
+    Swiper
   }
 };
 </script>
@@ -29,5 +25,10 @@ export default {
 * {
   padding: 0;
   margin: 0;
+  overflow: hidden;
+}
+
+.bg {
+  padding-top: 100px;
 }
 </style>

@@ -60,6 +60,15 @@ const routes = [
       import(/* webpackChunkName: "Product" */ "../views/Product.vue")
   },
   {
+    path: "/info",
+    name: "INFO",
+    component: () =>
+      import(/* webpackChunkName: "Product" */ "../views/Info.vue"),
+    meta: {
+      title: "INFO | COMB JELLY"
+    }
+  },
+  {
     path: "/dashboard",
     name: "Dashboard",
     meta: {

@@ -148,6 +148,10 @@ export default {
   font-size: 12px;
 }
 
+h3 {
+  word-wrap: break-word;
+}
+
 .table th,
 .table td {
   vertical-align: inherit;

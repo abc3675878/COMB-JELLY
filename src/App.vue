@@ -6,7 +6,10 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  created() {
+    document.title = "COMB JELLY";
+  }
 };
 </script>
 
@@ -22,6 +25,10 @@ export default {
   list-style: none;
   color: #181818;
   font-weight: 300;
+}
+
+#app {
+  // overflow: hidden;
 }
 
 html,

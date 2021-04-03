@@ -11,8 +11,9 @@
           <li>
             <router-link to="/products">SHOP</router-link>
           </li>
-          <li>SALE</li>
-          <li>INFO</li>
+          <li>
+            <router-link to="/info">INFO</router-link>
+          </li>
         </div>
         <div class="cart" @click.prevent="toggleCart">
           <a href="">CART({{ this.cart.data.carts.length }})</a>
