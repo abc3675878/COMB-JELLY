@@ -8,40 +8,60 @@
       </h1>
       <div class="row special_products">
         <div class="col-6 col-md-3">
-          <img src="../assets/images/home_01.jpg" alt="" />
+          <router-link to="/products/-MWxn7DIhKeJccVj-Ex8"
+            ><img src="../assets/images/home_01.jpg" alt=""
+          /></router-link>
         </div>
         <div class="col-6 col-md-3 order-1 order-md-0">
           <div class="row">
             <div class="col-6">
-              <img src="../assets/images/002.jpg" alt="" />
+              <router-link to="/products/-MWxn7DIhKeJccVj-Ex8"
+                ><img src="../assets/images/002.jpg" alt=""
+              /></router-link>
             </div>
             <div class="col-6">
-              <img src="../assets/images/007.jpg" alt="" />
+              <router-link to="/products/-MWxgObrXmSfZBPYBwwW"
+                ><img src="../assets/images/007.jpg" alt=""
+              /></router-link>
             </div>
             <div class="col-6">
-              <img src="../assets/images/006.jpg" alt="" />
+              <router-link to="/products/-MWxiUhQSa9w-m726Rpb"
+                ><img src="../assets/images/006.jpg" alt=""
+              /></router-link>
             </div>
             <div class="col-6">
-              <img src="../assets/images/001.jpg" alt="" />
+              <router-link to="/products/-MWxn7DIhKeJccVj-Ex8"
+                ><img src="../assets/images/001.jpg" alt=""
+              /></router-link>
             </div>
           </div>
         </div>
         <div class="col-6 col-md-3">
-          <img src="../assets/images/003.jpg" alt="" />
+          <router-link to="/products/-MWxZQF465HqGawgltLv"
+            ><img src="../assets/images/003.jpg" alt=""
+          /></router-link>
         </div>
         <div class="col-6 col-md-3 order-1 order-md-0">
           <div class="row">
             <div class="col-6">
-              <img src="../assets/images/004.jpg" alt="" />
+              <router-link to="/products/-MWxZQF465HqGawgltLv"
+                ><img src="../assets/images/004.jpg" alt=""
+              /></router-link>
             </div>
             <div class="col-6">
-              <img src="../assets/images/009.jpg" alt="" />
+              <router-link to="/products/-MWxlRVPdAVIDWbvpOBJ"
+                ><img src="../assets/images/009.jpg" alt=""
+              /></router-link>
             </div>
             <div class="col-6">
-              <img src="../assets/images/010.jpg" alt="" />
+              <router-link to="/products/-MWxq838uiBEl_-w4xf3"
+                ><img src="../assets/images/010.jpg" alt=""
+              /></router-link>
             </div>
             <div class="col-6">
-              <img src="../assets/images/008.jpg" alt="" />
+              <router-link to="/products/-MWxWyU_TLv_omvGr1z2"
+                ><img src="../assets/images/008.jpg" alt=""
+              /></router-link>
             </div>
           </div>
         </div>
@@ -77,5 +97,12 @@ img {
   width: 100%;
   border: 1px solid white;
   // padding: 5px;
+}
+
+.special_products {
+  a {
+    border: none;
+    display: inline;
+  }
 }
 </style>

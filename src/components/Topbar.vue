@@ -199,7 +199,7 @@ export default {
 
 .logo {
   img {
-    width: 290px;
+    width: 250px;
   }
   margin-bottom: 10px;
 }

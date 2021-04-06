@@ -138,7 +138,7 @@ button {
 
 .bg {
   height: 1000px;
-  background: url(../assets/images/DV32.png) no-repeat center/cover;
+  background: url(../assets/images/DV32.png) no-repeat left top/cover;
   // filter: brightness(50%);
 
   p {

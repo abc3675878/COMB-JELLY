@@ -26,7 +26,7 @@
           <i class="fab fa-weibo"></i>
         </div>
         <div class="col-md-4 col-12 text-center order-1 order-md-0 mt-3">
-          <p>© 2021 COMB JELLY</p>
+          <p>© 2021 COMB JELLY | Web Design by Charlie Jang</p>
         </div>
         <div class="col-md-4 col-12 text-md-right text-center mt-3">
           <router-link to="/info">CONTACT US</router-link>
@@ -42,7 +42,6 @@
               href="https://shop378064996.world.taobao.com/search.htm?spm=a312a.7700824.w5001-23260896675.3.42aeb7bfx8g5F2&search=y&scene=taobao_shop"
               >如需購買請點此</a
             >
-            <i class="fas fa-exclamation-triangle"></i>
           </marquee>
         </div>
       </div>
