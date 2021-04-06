@@ -104,7 +104,8 @@
           </div>
         </div>
         <div class="col-12 col-md-4 text_area">
-          <div class="title">{{ product.title }}</div>
+          <img src="../assets/images/final logo white.png" width="120" />
+          <div class="title mt-3">{{ product.title }}</div>
           <div
             :class="{ sale: product.origin_price !== product.price }"
             class="price"

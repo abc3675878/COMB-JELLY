@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <router-view />
+    <vue-page-transition name="fade">
+      <router-view />
+    </vue-page-transition>
   </div>
 </template>
 
@@ -47,5 +49,10 @@ a {
     text-decoration: none;
     border-bottom: 1px solid $text1;
   }
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
 }
 </style>

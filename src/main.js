@@ -7,6 +7,9 @@ import VueAxios from "vue-axios";
 import VueAwesomeSwiper from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 import "bootstrap";
+import VuePageTransition from "vue-page-transition";
+import AOS from "aos";
+import "aos/dist/aos.css";
 // 把event bus 掛載進來
 import "./bus";
 import {
@@ -31,6 +34,8 @@ Vue.component("ValidationProvider", ValidationProvider);
 
 Vue.use(VueAxios, axios);
 
+Vue.use(VuePageTransition);
+
 Vue.use(VueAwesomeSwiper);
 
 axios.defaults.withCredentials = true;
@@ -38,6 +43,9 @@ axios.defaults.withCredentials = true;
 Vue.config.productionTip = false;
 
 new Vue({
+  created() {
+    AOS.init();
+  },
   router,
   store,
   render: h => h(App)

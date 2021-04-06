@@ -193,7 +193,7 @@ export default {
   padding: 12px;
   padding-top: 24px;
   position: fixed;
-  background-color: white;
+  background-color: transparent;
   z-index: 99999;
 }
 
