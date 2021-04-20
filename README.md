@@ -2,6 +2,8 @@
 
 作品網址 https://abc3675878.github.io/COMB-JELLY/#/
 
+Wireframe 設計 https://www.figma.com/file/WomgzoQ448OcxMHRxLk4WY/Comb-Jelly?node-id=0%3A1
+
 ---
 
 ###### 使用 Vue.js 打造的品牌購物網，圖片和文案由品牌獨家授權使用。
